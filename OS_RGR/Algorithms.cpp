@@ -56,59 +56,50 @@ void secondChanceAlgorithm(const std::list<size_t>& referenced, size_t bufferSiz
 
 void clockAlgorithm(const std::list<size_t>& referenced, size_t bufferSize)
 {
-	std::list<Page> pages;
 	bool exist;
-
+	
+	CircularList<Page> pages;
+	Node<Page>* tmpnodeptr;
 	for (auto i = referenced.begin(); i != referenced.end(); i++)
 	{
-		auto iter = pages.begin();
 		if (pages.size() < bufferSize)
 		{
 			exist = 0;
-			for (auto j = pages.begin(); j != pages.end(); j++)
-				if ((*j).getId() == (*i))
-				{
-					exist = 1;
-					(*j).setChance(true);
-				}
-			if (!exist) 
+			if ((tmpnodeptr=pages.exist((*i))) != nullptr)
 			{
-				
-				pages.push_back(*i);
-				iter = pages.end();
+				exist = 1;
+				tmpnodeptr->data.setChance(true);
 			}
+			if (!exist)
+			{
+				pages.push(Page(*i));
+				pages.next();
+			}
+			if (pages.size() == bufferSize) pages.next();
 		}
 		else
 		{
-			if (iter != pages.end()) iter++;
-			else iter = pages.begin();
 			exist = 0;
-			for (auto j = pages.begin(); j != pages.end(); j++)
-				if ((*j).getId() == (*i))
-				{
-					exist = 1;
-					(*j).setChance(true);
-				}
-			if (!exist)
+			if ((tmpnodeptr = pages.exist(*i)) != nullptr)
 			{
-				while (!exist)
+				exist = 1;
+				tmpnodeptr->data.setChance(true);
+			}
+			
+			while (!exist)
+			{
+				if (pages.get().GetChance() == true)
 				{
-					if ((*iter).GetChance() == true)
-					{
-						(*iter).setChance(false);
-					}
-					else
-					{
-						(*iter).setid((*i));
-						exist = 1;
-					}
-					
+					pages.getTop()->data.setChance(false);
 				}
+				else
+				{
+					pages.rewrite(*i);
+					exist = 1;
+				}
+				pages.next();
 			}
 		}
-		std::cout << "requesting " << (*i) << ": ";
-		for (auto j = pages.begin(); j != pages.end(); j++)
-			std::cout << (*j) << " ";
-		std::cout << std::endl;
+		std::cout <<"requesting "<<*i<<": "<< pages << std::endl;
 	}
 }

@@ -1,0 +1,4 @@
+﻿  OS Lab 5.cpp
+C:\Users\Nikit\source\repos\OS Lab 5\OS Lab 5\OS Lab 5.cpp(13,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\Nikit\source\repos\OS Lab 5\OS Lab 5\OS Lab 5.cpp(74,23): warning C4018: <: несоответствие типов со знаком и без знака
+  OS Lab 5.vcxproj -> C:\Users\Nikit\source\repos\OS Lab 5\Debug\OS Lab 5.exe

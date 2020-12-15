@@ -1,49 +1,15 @@
-﻿// OS RGR.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+﻿// OS Practice 6.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
+#include "Producer_And_Consumer.h"
 
-#include <iostream>
-#include <list>
-#include <random>
-#include <ctime>
-#include <chrono>
-#include "Page.h"
-#include "Algorithms.h"
 
 
 int main()
 {
-    srand(time(NULL));
-    std::list<size_t> references;
-    int amount;
-    int size;
-    do
-    {
-        std::cout << "Enter amount of references\n";
-        std::cin >> amount;
-    } while (amount < 1);
-    do
-    {
-        std::cout << "Enter amount of pages that can be listed\n";
-        std::cin >> size;
-    } while (size < 1);
-    
-    for (int i = 0; i < amount; i++)
-        references.push_back(rand()%(amount/size));
+    PAC::Producer_And_Consumer Test;
+    Test.Invoke();
 
-    for (auto i = references.begin(); i != references.end(); i++)
-        std::cout << (*i) << " ";
-    std::cout << std::endl;
-
-    auto begin = std::chrono::steady_clock::now();
-    secondChanceAlgorithm(references, size);
-    auto end = std::chrono::steady_clock::now();
-
-    std::cout<<"Time: "<< std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count() << std::endl<<std::endl;
-
-    begin = std::chrono::steady_clock::now();
-    clockAlgorithm(references, size);
-    end = std::chrono::steady_clock::now();
-    std::cout << "Time: " << std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin).count() << std::endl;
+    return 1;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

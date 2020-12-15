@@ -1,2 +1,3 @@
-﻿  Algorithms.cpp
+﻿  OS RGR.cpp
+C:\Users\Nikit\source\repos\OS RGR\OS RGR\OS RGR.cpp(15,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
   OS RGR.vcxproj -> C:\Users\Nikit\source\repos\OS RGR\Debug\OS RGR.exe
